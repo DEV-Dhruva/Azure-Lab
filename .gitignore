@@ -1,0 +1,48 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rtifacts/
+
+# Visual Studio generated files
+*.cache
+*.pdb
+*.ilk
+*.meta
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# ASP.NET Core
+wwwroot/lib/
+appsettings.*.local.json
+
+# Logs
+*.log
+
+# Docker
+**/.docker/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Test results
+[Tt]est[Rr]esult*/
