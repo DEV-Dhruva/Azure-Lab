@@ -25,5 +25,35 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+app.MapGet("/health", () => Results.Ok(new { status = "Healthy" }));
+
+app.MapGet("/whoami", () => Results.Ok(new
+{
+    Hostname = Environment.MachineName,
+    Replica = Environment.GetEnvironmentVariable("CONTAINER_APP_REPLICA_NAME"),
+    Time = DateTimeOffset.UtcNow
+}));
+
+app.MapGet("/work", async (ILogger<Program> logger) =>
+{
+    var started = DateTimeOffset.UtcNow;
+
+    logger.LogInformation(
+        "Work started at {Started} on host {Host}",
+        started, Environment.MachineName);
+
+    await Task.Delay(TimeSpan.FromSeconds(3));
+
+    logger.LogInformation(
+        "Work completed at {Completed} on host {Host}",
+        DateTimeOffset.UtcNow, Environment.MachineName);
+
+    return Results.Ok(new
+    {
+        Hostname = Environment.MachineName,
+        Started = started,
+        Completed = DateTimeOffset.UtcNow
+    });
+});
 
 app.Run();
